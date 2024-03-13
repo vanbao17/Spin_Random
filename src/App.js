@@ -35,6 +35,7 @@ function App() {
   //   },
   //   [newarr]
   // );
+  console.log(newarr);
   return (
     <div className={cx("container")}>
       <div className={cx("containerSpin")}>
@@ -78,9 +79,9 @@ function App() {
                 placeholder={item.probability}
                 onKeyDown={(e) => {
                   if (e.key == "Enter") {
-                    slices.forEach((item, index1) => {
+                    slices.forEach((item1, index1) => {
                       if (index == index1) {
-                        item.probability = parseInt(e.target.value) / 100;
+                        item1.probability = parseInt(e.target.value) / 100;
                         setnewarr([...newarr, slices[index1]]);
                       }
                     });

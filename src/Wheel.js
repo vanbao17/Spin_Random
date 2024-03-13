@@ -78,7 +78,6 @@ const Wheel = (
           selectedElement = element;
         }
       });
-      console.log(slices);
       let selectedElementIndex = slices.indexOf(selectedElement);
       // Gửi thông điệp hoặc xử lý kết quả theo ý muốn
       const targetAngle = (selectedElementIndex * sliceDeg + 90) % 360;
