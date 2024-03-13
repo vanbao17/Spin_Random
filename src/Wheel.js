@@ -58,11 +58,18 @@ const Wheel = (
   const spin = useCallback(
     (elements) => {
       setrote(5);
-      const totalElements = elements.length;
+      const uniqueArray = [];
+      elements.forEach((item) => {
+        if (!uniqueArray.some((i) => i.name === item.name)) {
+          uniqueArray.push(item);
+        }
+      });
+      console.log(uniqueArray);
+      const totalElements = uniqueArray.length;
       const calculateAngle = (index, total) => (index / total) * 360;
 
       const randomValue = Math.random(); // Số ngẫu nhiên từ 0 đến 1
-      const totalProbability = elements.reduce(
+      const totalProbability = uniqueArray.reduce(
         (sum, element) => sum + element.probability,
         0
       );
@@ -70,7 +77,7 @@ const Wheel = (
       let currentProbability = 0;
       let selectedElement = null;
 
-      elements.forEach((element, index) => {
+      uniqueArray.forEach((element, index) => {
         const probability = element.probability / totalProbability;
         currentProbability += probability;
 

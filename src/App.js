@@ -35,7 +35,7 @@ function App() {
   //   },
   //   [newarr]
   // );
-  console.log(newarr);
+  //console.log(newarr);
   return (
     <div className={cx("container")}>
       <div className={cx("containerSpin")}>
@@ -92,7 +92,7 @@ function App() {
           ))}
           <div
             onClick={() => {
-              console.log(newarr);
+              //console.log(newarr);
               const result = wheelRef.current.spin(newarr);
             }}
           >
