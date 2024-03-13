@@ -5,9 +5,11 @@ import React, {
   useCallback,
   useImperativeHandle,
   forwardRef,
+  useContext,
 } from "react";
 import drawWheelSlice from "./drawWheelSlice";
 import deg2rad from "./deg2rad";
+import { Context } from "./store/Context";
 
 function getRandomColor() {
   return "#" + (0x1000000 + Math.random() * 0xffffff).toString(16).substr(1, 6);
@@ -24,7 +26,10 @@ const Wheel = (
   ref
 ) => {
   const [finalDeg, setFinalDeg] = useState(0);
-  const [result, setresult] = useState([]);
+  const [rote, setrote] = useState(5);
+  const [result1, setresult1] = useState([]);
+  const { result, setresult } = useContext(Context);
+  const { msbox, setmsbox } = useContext(Context);
   const canvasRef = useRef(null);
   const slicesCount = slices.length;
   const sliceDeg = 360 / slicesCount;
@@ -52,6 +57,7 @@ const Wheel = (
 
   const spin = useCallback(
     (elements) => {
+      setrote(5);
       const totalElements = elements.length;
       const calculateAngle = (index, total) => (index / total) * 360;
 
@@ -76,7 +82,7 @@ const Wheel = (
       let selectedElementIndex = slices.indexOf(selectedElement);
       // Gửi thông điệp hoặc xử lý kết quả theo ý muốn
       const targetAngle = (selectedElementIndex * sliceDeg + 90) % 360;
-      setresult([...result, selectedElementIndex]);
+      setresult1([...result1, selectedElement]);
       // const min = finalDeg + 500;
       // const max = finalDeg + 1500;
       //const resultDeg1 = Math.floor(Math.random() * (max - min + 1)) + min;
@@ -149,12 +155,15 @@ const Wheel = (
         <canvas
           style={{
             transform: `rotate(${finalDeg}deg)`,
-            transition: "transform 4s ease 0s",
+            transition: `transform ${rote}s ease 0s`,
           }}
           ref={canvasRef}
           width={size}
           height={size}
           onTransitionEnd={(e) => {
+            //setmsbox(true);
+            setresult(result1);
+            setrote(0);
             setFinalDeg(0);
           }}
         />

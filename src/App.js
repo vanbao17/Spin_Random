@@ -1,9 +1,10 @@
 import Wheel from "./Wheel";
 import styles from "./App.module.scss";
 import classNames from "classnames/bind";
-import React, { useRef, useState, useCallback } from "react";
+import React, { useRef, useState, useCallback, useContext } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrashCan } from "@fortawesome/free-solid-svg-icons";
+import { Context } from "./store/Context";
 const cx = classNames.bind(styles);
 function App() {
   const [newarr, setnewarr] = useState([]);
@@ -17,7 +18,8 @@ function App() {
   const [slices, setSlices] = useState(initialState);
   const countRef = useRef(slices.length);
   const wheelRef = useRef(null);
-
+  const { result, setresult } = useContext(Context);
+  const { msbox, setmsbox } = useContext(Context);
   const handleSpin = useCallback(() => {
     const result = wheelRef.current.spin();
     console.log("From App: ", result);
@@ -96,6 +98,20 @@ function App() {
             Xác nhận
           </div>
         </div>
+      </div>
+      <div>
+        <h2>
+          Kết quả: {result.length > 1 ? result[result.length - 1].name : ""}
+        </h2>
+        {/* <div>
+            <span
+              onClick={() => {
+                setmsbox(false);
+              }}
+            >
+              Đóng
+            </span>
+          </div> */}
       </div>
     </div>
   );

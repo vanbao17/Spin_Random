@@ -21,3 +21,23 @@
     justify-content: space-between;
   }
 }
+.messbox {
+  background-color: #fff;
+  width: 60%;
+  height: 30%;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  top: 30%;
+  position: absolute;
+  span {
+    padding: 10px;
+    background-color: tomato;
+    font-weight: 700;
+    border-radius: 10px;
+    color: #fff;
+    cursor: pointer;
+  }
+}
